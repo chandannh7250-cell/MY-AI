@@ -1,21 +1,33 @@
 import io
 import sys
+import re
 
 def generate_code(prompt):
-    prompt = prompt.lower().strip()
+    p = prompt.lower().strip()
+    original = prompt.strip()
     
-    if "table of" in prompt:
+    # --- CALCULATOR FEATURE ---
+    # Agar user ne 5+5, 10*2, 100/4 likha
+    # Ya add, plus, minus, multiply likha
+    if any(x in p for x in ["+", "-", "*", "/", "plus", "add", "minus", "multiply", "divide", "calculator", "calc"]):
+        # Sirf number aur + - * / . ko nikal lo
+        expr = re.sub(r'[^0-9+\-*/.() ]', '', original)
+        if expr.strip():
+            return f"print({expr})"
+        return "print('Calculator me number likho jaise: 5+5')"
+
+    if "table of" in p:
         try:
-            num = int(prompt.split("table of")[1].strip())
+            num = int(p.split("table of")[1].strip())
         except:
             num = 5
         code = f"for i in range(1, 11):\n    print(f'{num} x {{i}} = {{{num}*i}}')"
         return code
 
-    elif "hello" in prompt:
+    elif "hello" in p:
         return "print('Hello! Kya help chahiye?')"
     
-    return "print('Mujhe samajh nahi aaya')"
+    return "print('Mujhe samajh nahi aaya. Calculator try karo: 5+5')"
 
 def run_code(code):
     buf = io.StringIO()
