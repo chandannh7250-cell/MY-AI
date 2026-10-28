@@ -89,7 +89,16 @@ except:
         print("element not found")
 """
     return code
-
+def password_code():
+    code = '''
+password=""
+while password != "12345":
+  password=input("enter your password=")
+  if password != "12345":
+    print("not login password")
+print("login password")
+'''
+    return code
 # Engine isko aise call karega
 def search_code(prompt):
     prompt = prompt.lower()
@@ -104,8 +113,8 @@ def search_code(prompt):
     if "password" in prompt or "login" in prompt:
         return password_code(prompt)
     
-    if "tuple" in prompt or "element" in prompt:
+    if "tuple" in prompt or "element" in prompt or "check" in prompt:
         return tuple_all_codes()
         
     return "print('Code not found')"
-    print(search_code("password check code do"))
+    
