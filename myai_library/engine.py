@@ -111,10 +111,8 @@ def search_code(prompt):
     prompt = prompt.lower()
     
     if "password" in prompt or "login" in prompt:
-        return password_code(prompt)
+        return password_code ()
     
     if "tuple" in prompt or "element" in prompt or "check" in prompt:
-        return tuple_all_codes()
-        
+        return tuple_all_codes() 
     return "print('Code not found')"
-    
